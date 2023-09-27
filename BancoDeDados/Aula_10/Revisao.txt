@@ -1,0 +1,130 @@
+1. **O que você entende por Persistência de Dados?**
+    - Persistência de Dados é a capacidade de armazenar informações de forma duradoura e acessível em um sistema.
+
+2. **Quais as diferenças entre objetos transientes e objetos persistentes? Explique.**
+    - Objetos transientes existem apenas na memória, enquanto objetos persistentes são armazenados permanentemente em um banco de dados.
+
+3. **Qual a principal diferença entre Banco de Dados Relacional e Banco de Dados Orientada a Objetos?**
+    - A principal diferença é que o Banco de Dados Relacional usa tabelas para armazenar dados, enquanto o Banco de Dados Orientada a Objetos usa objetos para representar dados.
+
+4. **Qual o objetivo do mapeamento objeto-relacional (ORM)?**
+    - O objetivo do mapeamento objeto-relacional (ORM) é facilitar a integração entre modelos de dados orientados a objetos e bancos de dados relacionais.
+
+5. **Defina:**
+a) **Dados estruturados:**
+    - Dados estruturados têm um formato definido.
+    b) **Dados semiestrurados:**
+    - Dados semiestruturados têm alguma estrutura, mas não rígida.
+    c) **Dados não estruturados:**
+    - Dados não estruturados não têm uma estrutura definida.
+
+6. **Qual o nome da biblioteca responsável pela extração/captura de dados disponíveis em arquivos HTML ou XML? Explique.**
+    - A biblioteca responsável pela extração de dados em HTML ou XML é o BeautifulSoup. Ela facilita a análise e manipulação desses dados.
+
+7. **Os arquivos do tipo XML (eXtensible Markup Language) surgiram como forma de estruturação e troca de dados pela internet. Dentre suas principais características preencha os seguintes questionamentos:**
+a) **Sintaxe inicial na primeira linha do arquivo.xml:**
+    - A primeira linha de um arquivo XML geralmente contém a declaração <?xml version="1.0" encoding="UTF-8"?>.
+    b) **Os dados são organizados em formato hierárquico ou tabular?**
+    - Os dados XML são organizados em formato hierárquico.
+    c) **Quais são as formas de representação de um documento XML. Justifique.**
+    - As formas de representação em XML incluem elementos, atributos e comentários.
+
+8. ta la embaiaxo
+
+9. **Defina o que é um documento JSON e quais suas principais características.**
+    - Um documento JSON é uma estrutura de dados leve e legível por humanos que consiste em pares chave-valor. Suas principais características são simplicidade e facilidade de uso.
+
+10. **O que significa o processo de serialização (JSON.stringify) e desserialização (JSON.parse) de documentos do tipo JSON?**
+    - A serialização (JSON.stringify) converte um objeto em uma string JSON, enquanto a desserialização (JSON.parse) faz o oposto, convertendo uma string JSON em um objeto JavaScript.
+
+11. **Faça um exemplo de documento JSON a partir de dados sobre serviços de vendas online. Utilize dados do tipo, string, inteiro, array e objetos.**
+    - Exemplo de documento JSON para serviços de vendas online:
+
+```json
+{
+  "servicos": [
+    {
+      "nome": "Entrega Expressa",
+      "preco": 10.99,
+      "disponivel": true,
+      "avaliacoes": [4, 5, 4],
+      "detalhes": {
+        "tempo_estimado": "2 horas",
+        "area_entrega": ["cidade A", "cidade B"]
+      }
+    },
+    {
+      "nome": "Embalagem de Presente",
+      "preco": 2.5,
+      "disponivel": false,
+      "avaliacoes": [3, 4],
+      "detalhes": {
+        "material": "papel de presente"
+      }
+    }
+  ]
+}
+
+```
+
+12. **Quais são as principais diferenças entre documentos do tipo JSON e XML.**
+    - Principais diferenças entre JSON e XML: JSON é mais leve, fácil de ler, usa menos tags, e é mais comumente usado para transmitir dados estruturados.
+
+13. **Para que serve utilizar JDBC com Sistemas de Gerenciamento de Banco de Dados.**
+    - JDBC (Java Database Connectivity) é usado para conectar e interagir com bancos de dados em aplicativos Java.
+
+14. **Quais são os principais componentes durante a implementação do JDBC? Explique.**
+    - Os principais componentes do JDBC incluem DriverManager, Connection, Statement, ResultSet e DataSource, que permitem a conexão e manipulação de bancos de dados.
+
+15. **Cites restrições sobre a utilização do JDBC para sistemas atuais.**
+    - Restrições no uso do JDBC em sistemas atuais incluem vulnerabilidades de segurança, desempenho inadequado em escalas muito grandes e complexidade na manipulação de dados não relacionais.
+
+16. **Elabore um documento xml sobre produtos disponíveis para venda em empresas do comércio eletrônico/móveis/imóveis/roupas, a partir das seguintes condições:**
+    
+    ```xml
+    <produtos>
+    <!-- Produto 1: Móveis -->
+    <produto>
+    <categoria>Móveis</categoria>
+    <nome>Sofá de Couro</nome>
+    <caracteristicas>
+    <cor>Marrom</cor>
+    <material>Couro genuíno</material>
+    <tamanho>3 lugares</tamanho>
+    <estilo>Contemporâneo</estilo>
+    <preco>799.99</preco>
+    </caracteristicas>
+    </produto>
+    
+    <!-- Produto 2: Roupas -->
+    <produto>
+        <categoria>Roupas</categoria>
+        <nome>Vestido de Verão</nome>
+        <caracteristicas>
+            <cor>Azul</cor>
+            <tamanho>M</tamanho>
+            <material>Algodão</material>
+            <estampa>Floral</estampa>
+            <preco>39.99</preco>
+        </caracteristicas>
+    </produto>
+    
+    <!-- Produto 3: Imóveis -->
+    <produto>
+        <categoria>Imóveis</categoria>
+        <nome>Casa na Praia</nome>
+        <caracteristicas>
+            <tipo>Casa</tipo>
+            <localização>Praia de Example</localização>
+            <quartos>4</quartos>
+            <banheiros>3</banheiros>
+            <área>200 m²</área>
+            <preço>350000.00</preço>
+        </caracteristicas>
+    </produto>
+    
+    ```
+    
+    </produtos>
+
+    
