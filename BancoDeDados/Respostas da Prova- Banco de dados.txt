@@ -1,0 +1,130 @@
+Código para estabelecer a conexão entre o Eclipse e o MongoDB: 
+package com.br.mongo.mongoProva;
+
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientOptions;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Updates;
+import model.Produto;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
+
+public class App {
+    public static void main(String[] args) {
+        try {
+            CodecRegistry pojoCodecRegistry = org.bson.codecs.configuration.CodecRegistries.fromRegistries(
+                    MongoClient.getDefaultCodecRegistry(),
+                    org.bson.codecs.configuration.CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+
+            MongoClient mongoClient = new MongoClient("localhost:27017",
+                    MongoClientOptions.builder().codecRegistry(pojoCodecRegistry).build());
+
+            MongoDatabase database = mongoClient.getDatabase("exemplo")
+                    .withCodecRegistry(pojoCodecRegistry);
+
+            MongoCollection<Produto> collection = database.getCollection("Produto", Produto.class);
+            
+            // Agora você pode usar a coleção 'collection' para interagir com o MongoDB
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+Código do MongoDB:
+db.Estradas.insertMany([
+    { nome: "Estrada A", status: "Congestionada", velocidadeMedia: 60 },
+    { nome: "Estrada B", status: "Normal", velocidadeMedia: 80 },
+    { nome: "Estrada C", status: "Congestionada", velocidadeMedia: 55 },
+    { nome: "Estrada D", status: "Normal", velocidadeMedia: 70 }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("651e0ed26e12baea3ac2e0eb"),
+    '1': ObjectId("651e0ed26e12baea3ac2e0ec"),
+    '2': ObjectId("651e0ed26e12baea3ac2e0ed"),
+    '3': ObjectId("651e0ed26e12baea3ac2e0ee")
+  }
+}
+db.Estradas.updateOne({ nome: "Estrada A" }, { $set: { nome: "Nova Estrada A" } })
+{
+acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 1,
+  upsertedCount: 0
+}
+db.Estradas.find({ status: "Congestionada" })
+{
+_id: ObjectId("651ca66dd4cf46e9c79f036e"),
+  nome: 'Nova Estrada A',
+  status: 'Congestionada',
+  velocidadeMedia: 60
+}
+{
+_id: ObjectId("651e0ed26e12baea3ac2e0ed"),
+  nome: 'Estrada C',
+  status: 'Congestionada',
+  velocidadeMedia: 55
+}
+db.Estradas.aggregate([
+    { $sort: { velocidadeMedia: -1 } },
+    { $limit: 1 },
+    { $project: { _id: 0, nome: 1, velocidadeMedia: 1 } }
+])
+{
+nome: 'Estrada B',
+  velocidadeMedia: 80
+}
+db.Acidentes.insertMany([
+    { tipoAcidente: "Colisão", status: "Em investigação", tipoVeiculo: "Carro", quantidadeAcidentes: 2, cidade: "Cidade A" },
+    { tipoAcidente: "Atropelamento", status: "Concluído", tipoVeiculo: "Bicicleta", quantidadeAcidentes: 1, cidade: "Cidade B" },
+    { tipoAcidente: "Colisão", status: "Em investigação", tipoVeiculo: "Moto", quantidadeAcidentes: 1, cidade: "Cidade C" },
+    { tipoAcidente: "Incêndio", status: "Concluído", tipoVeiculo: "Caminhão", quantidadeAcidentes: 3, cidade: "Cidade A" }
+])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("651e0f0c6e12baea3ac2e0ef"),
+    '1': ObjectId("651e0f0c6e12baea3ac2e0f0"),
+    '2': ObjectId("651e0f0c6e12baea3ac2e0f1"),
+    '3': ObjectId("651e0f0c6e12baea3ac2e0f2")
+  }
+}
+db.Acidentes.updateOne({ tipoAcidente: "Colisão" }, { $set: { status: "Concluído" } })
+{
+  acknowledged: true,
+  insertedId: null,
+  matchedCount: 1,
+  modifiedCount: 0,
+  upsertedCount: 0
+}
+db.Acidentes.find({ tipoVeiculo: "Carro" })
+{
+  _id: ObjectId("651ca6d9d4cf46e9c79f0372"),
+  tipoAcidente: 'Colisão',
+  status: 'Concluído',
+  tipoVeiculo: 'Carro',
+  quantidadeAcidentes: 2,
+  cidade: 'Cidade A'
+}
+{
+  _id: ObjectId("651e0f0c6e12baea3ac2e0ef"),
+  tipoAcidente: 'Colisão',
+  status: 'Em investigação',
+  tipoVeiculo: 'Carro',
+  quantidadeAcidentes: 2,
+  cidade: 'Cidade A'
+}
+db.Acidentes.aggregate([
+    
+    { $group: { _id: "cidade", totalAcidentes: { $sum: "$quantidadeAcidentes" } } }
+])
+{
+  _id: 'cidade',
+  totalAcidentes: 14
+}
